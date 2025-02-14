@@ -5,10 +5,6 @@ class SolidusAdmin::OptionTypes::Index::Component < SolidusAdmin::UI::Pages::Ind
     Spree::OptionType
   end
 
-  def row_url(option_type)
-    spree.edit_admin_option_type_path(option_type)
-  end
-
   def sortable_options
     {
       url: ->(option_type) { solidus_admin.move_option_type_path(option_type) },
@@ -16,11 +12,20 @@ class SolidusAdmin::OptionTypes::Index::Component < SolidusAdmin::UI::Pages::Ind
     }
   end
 
+  def edit_path(option_type)
+    solidus_admin.edit_option_type_path(option_type, **search_filter_params)
+  end
+
+  def turbo_frames
+    %w[resource_modal]
+  end
+
   def page_actions
     render component("ui/button").new(
       tag: :a,
       text: t('.add'),
-      href: spree.new_admin_option_type_path,
+      href: solidus_admin.new_option_type_path(**search_filter_params),
+      data: { turbo_frame: :resource_modal },
       icon: "add-line",
     )
   end
@@ -55,7 +60,9 @@ class SolidusAdmin::OptionTypes::Index::Component < SolidusAdmin::UI::Pages::Ind
     {
       header: :name,
       data: ->(option_type) do
-        content_tag :div, option_type.name
+        link_to option_type.name, edit_path(option_type),
+          data: { turbo_frame: :resource_modal },
+          class: 'body-link'
       end
     }
   end
@@ -64,7 +71,9 @@ class SolidusAdmin::OptionTypes::Index::Component < SolidusAdmin::UI::Pages::Ind
     {
       header: :presentation,
       data: ->(option_type) do
-        content_tag :div, option_type.presentation
+        link_to option_type.presentation, edit_path(option_type),
+          data: { turbo_frame: :resource_modal },
+          class: 'body-link'
       end
     }
   end
