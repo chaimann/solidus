@@ -42,7 +42,7 @@ class SolidusAdmin::UI::Forms::Field::Component < SolidusAdmin::BaseComponent
       tip:,
       error: errors,
       input_attributes: {
-        name: "#{object_name}[#{method}]",
+        name: "#{object_name}[#{method}]#{'[]' if attributes[:multiple].present?}",
         tag: :select,
         choices:,
         size:,
