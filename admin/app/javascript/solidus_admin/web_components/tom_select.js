@@ -26,14 +26,16 @@ class TomSelectElement extends HTMLSelectElement {
         },
       },
       maxOptions: null,
+      hidePlaceholder: true,
       onInitialize: function() {
         this.control_input.classList.toggle("opacity-0", this.items.length > 0);
         console.log("INIT")
       },
       onItemAdd: function(value, item) {
         console.log("ADDED")
-        // this.control_input.classList.add("opacity-0")
         this.control_input.placeholder = "";
+        this.setTextboxValue("");
+        this.refreshOptions();
       },
       onItemRemove: function(value, item) {
         if (this.items.length === 0) this.control_input.classList.remove("opacity-0");
@@ -43,7 +45,7 @@ class TomSelectElement extends HTMLSelectElement {
         // if (this.settings.mode === "single") return;
 
         this.control.classList.remove("ring", "ring-gray-300", "ring-0.5", "bg-white", "ring-offset-0", "outline-none");
-        this.control_input.classList.toggle("opacity-0", this.control_input.items.length > 0);
+        this.control_input.classList.toggle("opacity-0", this.items.length > 0);
       },
       onFocus: function() {
         // if (this.settings.mode === "single") return;
