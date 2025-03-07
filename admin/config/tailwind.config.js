@@ -4,7 +4,7 @@ const adminRoot = __dirname.replace(/\/config$/, '')
 
 module.exports = {
   content: [
-    `${adminRoot}/{app/helpers,app/views,app/components,app/assets/javascripts,spec/components/previews}/**/*`,
+    `${adminRoot}/{app/helpers,app/views,app/components,app/javascript,app/assets/javascripts,spec/components/previews}/**/*`,
   ],
   theme: {
     extend: {
@@ -77,12 +77,16 @@ module.exports = {
       backgroundImage: {
         "arrow-right-up-line": "url('solidus_admin/arrow_right_up_line.svg')",
         "arrow-down-s-fill-gray-700": "url('solidus_admin/arrow_down_s_fill_gray_700.svg')",
+        "arrow-up-s-fill-gray-700": "url('solidus_admin/arrow_up_s_fill_gray_700.svg')",
         "arrow-down-s-fill-red-400": "url('solidus_admin/arrow_down_s_fill_red_400.svg')",
       },
       boxShadow: {
         sm: "0px 1px 2px 0px rgba(0, 0, 0, 0.04)",
         base: "0px 4px 8px 0px rgba(0, 0, 0, 0.08), 0px 2px 4px -1px rgba(0, 0, 0, 0.04)",
       },
+      height: {
+        "5.5": "1.375rem",
+      }
     },
   },
   plugins: [

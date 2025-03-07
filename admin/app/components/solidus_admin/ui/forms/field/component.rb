@@ -48,6 +48,7 @@ class SolidusAdmin::UI::Forms::Field::Component < SolidusAdmin::BaseComponent
         size:,
         value: (object.public_send(method) if object.respond_to?(method)),
         error: (errors.to_sentence.capitalize if errors),
+        is: "tom-select",
         **attributes,
       }
     )

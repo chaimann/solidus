@@ -80,7 +80,7 @@ class SolidusAdmin::UI::Forms::Input::Component < SolidusAdmin::BaseComponent
       SIZES[size],
       specialized_classes,
       attributes[:class],
-    ].compact.join(" ")
+    ].compact.join(" ") if tag != :select || !attributes[:is]
 
     @tag = tag
     @size = size
