@@ -1,22 +1,23 @@
 import TomSelect from "tom-select";
 
 class TomSelectElement extends HTMLSelectElement {
-  static observedAttributes = ["is"]
+  // static observedAttributes = [""]
 
   connectedCallback() {
     const originalSelect = this;
 
     const tomselect = new TomSelect(originalSelect, {
-      controlClass: "flex flex-wrap items-center gap-1 rounded-sm w-full text-black bg-white border border-gray-300 rounded-sm placeholder:text-gray-400 " +
+      controlClass: "flex flex-wrap items-center gap-1 rounded-sm w-full text-black bg-white border border-gray-300 rounded-sm " +
         "hover:border-gray-500 focus:ring focus:ring-gray-300 focus:ring-0.5 focus:bg-white focus:ring-offset-0 " +
-        "[&:focus-visible]:outline-none disabled:bg-gray-50 disabled:text-gray-500 disabled:placeholder:text-gray-300 " +
+        "[&:focus-visible]:outline-none disabled:bg-gray-50 disabled:text-gray-500 " +
         "disabled:cursor-not-allowed invalid:border-red-600 invalid:hover:border-red-600 invalid:text-red-600 " +
         "aria-invalid:border-red-600 aria-invalid:hover:border-red-600 aria-invalid:text-red-600 form-select " +
         "bg-arrow-down-s-fill-gray-700 invalid:bg-arrow-down-s-fill-red-400 aria-invalid:bg-arrow-down-s-fill-red-400 " +
         "aria-expanded:bg-arrow-up-s-fill-gray-700 form-control-md pl-3 pr-10 py-1.5 font-normal text-sm min-h-9",
       controlInput: originalSelect.multiple ? '<input type="text" autocomplete="off" size="1" />' : null,
       dropdownClass: "w-full absolute border border-gray-100 mt-0.5 flex flex-col min-w-[10rem] p-2 rounded-sm shadow-lg bg-white z-10 text-sm",
-      dropdownContentClass: "[&>*]:p-2 [&>*]:rounded-sm [&>*:hover]:bg-gray-50 [&>*]:text-black [&>*]:min-w-fit",
+      dropdownContentClass: "[&>*]:p-2 [&>*]:rounded-sm [&>*:hover]:bg-gray-50 [&>*]:text-black [&>*]:min-w-fit [&_*[aria-selected='true']]:bg-gray-50",
+      // placeholder: originalSelect.getAttribute("placeholder"),
       plugins: {
         no_active_items: true,
         remove_button: {
@@ -25,15 +26,31 @@ class TomSelectElement extends HTMLSelectElement {
         },
       },
       maxOptions: null,
+      onInitialize: function() {
+        this.control_input.classList.toggle("opacity-0", this.items.length > 0);
+        console.log("INIT")
+      },
+      onItemAdd: function(value, item) {
+        console.log("ADDED")
+        // this.control_input.classList.add("opacity-0")
+        this.control_input.placeholder = "";
+      },
+      onItemRemove: function(value, item) {
+        if (this.items.length === 0) this.control_input.classList.remove("opacity-0");
+        console.log("REMOVE");
+      },
       onBlur: function() {
         // if (this.settings.mode === "single") return;
 
         this.control.classList.remove("ring", "ring-gray-300", "ring-0.5", "bg-white", "ring-offset-0", "outline-none");
+        this.control_input.classList.toggle("opacity-0", this.control_input.items.length > 0);
       },
       onFocus: function() {
         // if (this.settings.mode === "single") return;
 
         this.control.classList.add("ring", "ring-gray-300", "ring-0.5", "bg-white", "ring-offset-0", "outline-none");
+        this.control_input.classList.remove("opacity-0");
+        this.control_input.placeholder = "";
       },
       render: {
         item: function(data) {
