@@ -13,6 +13,14 @@
           class: "required"
         ) %>
         <%= render component("ui/forms/field").text_field(f, :description, class: "required") %>
+        <%= render component("ui/forms/field").select(
+          f,
+          :kind,
+          [[t(".kinds.country"), :country], [t(".kinds.state"), :state]],
+          object: @zone,
+          value: @zone.kind || :state
+        ) %>
+
       </div>
       <% modal.with_actions do %>
         <form method="dialog">

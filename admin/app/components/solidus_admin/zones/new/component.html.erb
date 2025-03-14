@@ -16,7 +16,7 @@
         <%= render component("ui/forms/field").select(
           f,
           :kind,
-          [['Country', :country], ['State', :state]],
+          [[t(".kinds.country"), :country], [t(".kinds.state"), :state]],
           object: @zone,
           value: @zone.kind || :state
         ) %>
