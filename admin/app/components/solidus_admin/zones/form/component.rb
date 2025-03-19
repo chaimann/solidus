@@ -7,4 +7,8 @@ class SolidusAdmin::Zones::Form::Component < SolidusAdmin::BaseComponent
     @form_url = form_url
     @form_id = form_id
   end
+
+  def title
+    @zone.new_record? ? t(".title.new") : t(".title.edit")
+  end
 end
