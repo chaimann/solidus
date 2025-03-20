@@ -23,8 +23,10 @@ class SolidusSelect extends HTMLSelectElement {
         },
       },
       onItemAdd: function() {
+        if (!originalSelect.multiple || this.currentResults.items.length) return;
+
         this.setTextboxValue("");
-        if (originalSelect.multiple) this.refreshOptions();
+        this.refreshOptions();
       },
     });
 
