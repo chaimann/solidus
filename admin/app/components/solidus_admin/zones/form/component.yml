@@ -1,0 +1,8 @@
+en:
+  kinds:
+    country: "Country based"
+    state: "State based"
+  title:
+    edit: "Edit Zone"
+    new: "New Zone"
+  type_to_search: "Type to search"

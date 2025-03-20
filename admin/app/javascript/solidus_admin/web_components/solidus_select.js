@@ -13,7 +13,7 @@ class SolidusSelect extends HTMLSelectElement {
       dropdownContentClass: "dropdown-content",
       optionClass: "option",
       wrapperClass: "wrapper",
-      maxOptions: null,
+      maxOptions: 500,
       refreshThrottle: 0,
       plugins: {
         no_active_items: true,
@@ -23,8 +23,10 @@ class SolidusSelect extends HTMLSelectElement {
         },
       },
       onItemAdd: function() {
+        if (!originalSelect.multiple || this.currentResults.items.length) return;
+
         this.setTextboxValue("");
-        if (originalSelect.multiple) this.refreshOptions();
+        this.refreshOptions();
       },
     });
 
