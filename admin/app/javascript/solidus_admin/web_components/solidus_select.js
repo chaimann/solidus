@@ -13,7 +13,7 @@ class SolidusSelect extends HTMLSelectElement {
       dropdownContentClass: "dropdown-content",
       optionClass: "option",
       wrapperClass: "wrapper",
-      maxOptions: null,
+      maxOptions: 500,
       refreshThrottle: 0,
       plugins: {
         no_active_items: true,

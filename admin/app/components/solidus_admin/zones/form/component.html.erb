@@ -12,6 +12,7 @@
             value: @zone.country_ids,
             multiple: true,
             class: "required",
+            placeholder: t(".type_to_search"),
             **stimulus_target("countriesSelect")
           ) %>
         </div>
@@ -24,6 +25,7 @@
             value: @zone.state_ids,
             multiple: true,
             class: "required",
+            placeholder: t(".type_to_search"),
             **stimulus_target("statesSelect")
           ) %>
         </div>
