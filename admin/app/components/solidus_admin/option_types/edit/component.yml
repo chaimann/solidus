@@ -3,5 +3,8 @@ en:
   panels:
     option_type:
       title: "Option Type"
+    option_values:
+      title: "Option Values"
+      add: "Add Option Value"
   save: Save
   title: "Edit Option Type"
