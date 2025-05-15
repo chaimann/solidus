@@ -11,7 +11,7 @@
     <% end %>
 
     <%= form_for @option_type, url: form_url, html: { id: form_id } do |f| %>
-      <%= render component('ui/panel').new(title: t(".panels.option_type")) do |panel| %>
+      <%= render component('ui/panel').new(title: t(".panels.option_type.title")) do |panel| %>
         <% panel.with_section(class: "flex flex-col gap-4") do %>
           <div class="flex gap-4 w-full">
             <%= render component("ui/forms/field").text_field(f, :name, class: "required") %>
