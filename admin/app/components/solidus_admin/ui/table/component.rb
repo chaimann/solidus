@@ -66,6 +66,7 @@ class SolidusAdmin::UI::Table::Component < SolidusAdmin::BaseComponent
     @data.columns.unshift selectable_column if @data.batch_actions.present? && @data.rows.present?
     @search = Search.new(**search) if search
     @sortable = Sortable.new(**sortable) if sortable
+    @data.columns.unshift sortable_handle if @sortable&.handle && @data.rows.present?
   end
 
   def selectable_column
@@ -89,6 +90,19 @@ class SolidusAdmin::UI::Table::Component < SolidusAdmin::BaseComponent
         )
       },
       col: { class: 'w-[52px]' },
+    )
+  end
+
+  def sortable_handle
+    Column.new(
+      header: "",
+      data: ->(_) do
+        component("ui/icon").new(
+          name: "draggable",
+          class: "w-5 h-5 cursor-grab #{@sortable.handle.delete_prefix('.')}"
+        )
+      end,
+      col: { class: "w-[52px]" },
     )
   end
 
