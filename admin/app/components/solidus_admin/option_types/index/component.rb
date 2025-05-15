@@ -8,7 +8,8 @@ class SolidusAdmin::OptionTypes::Index::Component < SolidusAdmin::UI::Pages::Ind
   def sortable_options
     {
       url: ->(option_type) { solidus_admin.move_option_type_path(option_type) },
-      param: 'position',
+      param: "position",
+      handle: ".handle",
     }
   end
 
