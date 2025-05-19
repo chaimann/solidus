@@ -69,7 +69,7 @@ module Spree
 
     @@line_item_attributes = [:id, :variant_id, :quantity, customer_metadata: {}]
 
-    @@option_value_attributes = [:name, :presentation]
+    @@option_value_attributes = [:id, :name, :presentation]
 
     @@option_type_attributes = [:name, :presentation, option_values_attributes: option_value_attributes]
 

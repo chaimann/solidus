@@ -22,15 +22,29 @@ class SolidusAdmin::OptionTypes::Edit::OptionValuesTable::Component < SolidusAdm
   def columns
     [
       {
+        col: { class: "w-0" },
+        data: ->(option_value) do
+          hidden_field_tag("option_type[option_values_attributes][][id]", option_value.id)
+        end
+      },
+      {
         header: :name,
         data: ->(option_value) do
-          component("ui/forms/input").new(name: "", value: option_value.name, class: "required")
+          component("ui/forms/input").new(
+            name: "option_type[option_values_attributes][][name]",
+            value: option_value.name,
+            class: "required"
+          )
         end
       },
       {
         header: :presentation,
         data: ->(option_value) do
-          component("ui/forms/input").new(name: "", value: option_value.presentation, class: "required")
+          component("ui/forms/input").new(
+            name: "option_type[option_values_attributes][][presentation]",
+            value: option_value.presentation,
+            class: "required"
+          )
         end
       },
     ]

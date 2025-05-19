@@ -2,6 +2,8 @@
 
 module SolidusAdmin
   class OptionTypesController < SolidusAdmin::ResourcesController
+    include Spree::Core::ControllerHelpers::StrongParameters
+
     before_action :load_option_type, only: [:move]
 
     def move
@@ -21,7 +23,7 @@ module SolidusAdmin
     def resource_class = Spree::OptionType
 
     def permitted_resource_params
-      params.require(:option_type).permit(:name, :presentation)
+      params.require(:option_type).permit(permitted_option_type_attributes)
     end
 
     def resources_collection = Spree::OptionType.unscoped
