@@ -1,0 +1,6 @@
+<tr
+  class="border-b border-gray-100 last:border-0 <%= @attributes.delete(:class) %>"
+  <%= tag.attributes(@attributes) %>
+>
+  <%= safe_join(cells) %>
+</tr>

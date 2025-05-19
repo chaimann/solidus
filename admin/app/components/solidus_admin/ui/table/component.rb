@@ -174,17 +174,26 @@ class SolidusAdmin::UI::Table::Component < SolidusAdmin::BaseComponent
     }, **attrs)
   end
 
-  def render_data_cell(column, data)
-    cell = column.data
-    cell = cell.call(data) if cell.respond_to?(:call)
-    cell = data.public_send(cell) if cell.is_a?(Symbol)
-    cell = cell.render_in(self) if cell.respond_to?(:render_in)
-    cell = tag.div(cell, class: "flex items-center gap-1.5 justify-start overflow-x-hidden") if column.wrap
+  def render_row(row)
+    row_url = @data.url&.call(row)
+    data_attributes = {}
 
-    tag.td(cell, class: "
-      py-2 px-4 h-10 vertical-align-middle leading-none
-      [tr:last-child_&:first-child]:rounded-bl-lg [tr:last-child_&:last-child]:rounded-br-lg
-    ")
+    if row_url
+      data_attributes[:action] = "click->#{stimulus_id}#rowClicked"
+      data_attributes[:"#{stimulus_id}-url-param"] = row_url
+    end
+
+    data_attributes[:"sortable-url"] = @sortable.url.call(row) if @sortable&.url
+
+    render component("ui/table/row").new(
+      row,
+      @data.columns,
+      class: "
+        #{'hover:bg-gray-50 cursor-pointer' if row_url}
+        #{'bg-gray-15 text-gray-700' if @data.fade&.call(row)}
+      ",
+      data: data_attributes,
+    )
   end
 
   def current_scope_name
