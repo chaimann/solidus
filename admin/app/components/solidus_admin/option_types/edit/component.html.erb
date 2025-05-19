@@ -25,7 +25,7 @@
           <%= render component("option_types/edit/option_values_table").new(@option_type.option_values) %>
         <% end %>
 
-        <% panel.with_action(name: t(".panels.option_values.add"), href: "#") %>
+        <% panel.with_action(name: t(".panels.option_values.add"), href: solidus_admin.add_option_value_option_types_path, data: { turbo_method: :post }) %>
       <% end %>
     <% end %>
 
