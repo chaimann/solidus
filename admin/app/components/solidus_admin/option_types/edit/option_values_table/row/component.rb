@@ -2,7 +2,11 @@
 
 class SolidusAdmin::OptionTypes::Edit::OptionValuesTable::Row::Component < SolidusAdmin::BaseComponent
   def call
-    render component("ui/table/row").new(Spree::OptionValue.new, SolidusAdmin::UI::Table::Component::Data.new(columns:).columns)
+    render component("ui/table/row").new(
+      Spree::OptionValue.new,
+      SolidusAdmin::UI::Table::Component::Data.new(columns:).columns,
+      "data-controller": stimulus_id
+    )
   end
 
   def columns
@@ -11,7 +15,18 @@ class SolidusAdmin::OptionTypes::Edit::OptionValuesTable::Row::Component < Solid
         # empty cell
       },
       {
-        # empty cell
+        data: ->(_) do
+          [
+            component("ui/button").new(
+              icon: "delete-bin-7-line",
+              scheme: :danger,
+              size: :s,
+              "aria-label": t(".delete"),
+              data: { "action": "#{stimulus_id}#remove" }
+            ),
+            { class: "!px-3" }
+          ]
+        end
       },
       {
         # empty cell
