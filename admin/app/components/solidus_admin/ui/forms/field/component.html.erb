@@ -1,12 +1,14 @@
 <label class="flex flex-col gap-2 w-full">
-  <div class="flex gap-1 items-center">
-    <span class="
-      text-gray-700
-      font-semibold text-xs
-    "><%= @label %></span>
+  <% unless @input_attributes[:"aria-label"] %>
+    <div class="flex gap-1 items-center">
+      <span class="
+        text-gray-700
+        font-semibold text-xs
+      "><%= @label %></span>
 
-    <%= render component('ui/toggletip').new(text: @tip) if @tip.present? %>
-  </div>
+      <%= render component('ui/toggletip').new(text: @tip) if @tip.present? %>
+    </div>
+  <% end %>
 
   <% if @input_attributes.present? %>
     <%= render component('ui/forms/input').new(**@input_attributes) %>

@@ -11,6 +11,10 @@ class SolidusAdmin::UI::Forms::Field::Component < SolidusAdmin::BaseComponent
     @attributes = attributes
     @input_attributes = input_attributes
 
+    if @input_attributes[:"aria-label"]
+      @input_attributes[:"aria-label"].is_a?(String) || @input_attributes[:"aria-label"] = @label
+    end
+
     raise ArgumentError, "provide either a block or input_attributes" if content? && input_attributes
   end
 
