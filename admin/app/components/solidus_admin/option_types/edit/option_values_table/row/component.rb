@@ -17,18 +17,24 @@ class SolidusAdmin::OptionTypes::Edit::OptionValuesTable::Row::Component < Solid
         # empty cell
       },
       {
-        data: ->(_) do
-          component("ui/forms/input").new(
-            name: "option_type[option_values_attributes][][name]",
-            class: "required"
+        data: ->(option_value) do
+          component("ui/forms/field").text_field(
+            "option_type[option_values_attributes][]",
+            :name,
+            object: option_value,
+            class: "required",
+            "aria-label": true,
           )
         end
       },
       {
-        data: ->(_) do
-          component("ui/forms/input").new(
-            name: "option_type[option_values_attributes][][presentation]",
-            class: "required"
+        data: ->(option_value) do
+          component("ui/forms/field").text_field(
+            "option_type[option_values_attributes][]",
+            :presentation,
+            object: option_value,
+            class: "required",
+            "aria-label": true,
           )
         end
       }
