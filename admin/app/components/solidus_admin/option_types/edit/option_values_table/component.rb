@@ -30,25 +30,31 @@ class SolidusAdmin::OptionTypes::Edit::OptionValuesTable::Component < SolidusAdm
       {
         header: :name,
         data: ->(option_value) do
-          component("ui/forms/field").text_field(
-            "option_type[option_values_attributes][]",
-            :name,
-            object: option_value,
-            class: "required",
-            "aria-label": true
-          )
+          [
+            component("ui/forms/field").text_field(
+              "option_type[option_values_attributes][]",
+              :name,
+              object: option_value,
+              class: "required",
+              "aria-label": true
+            ),
+            { class: "align-top" }
+          ]
         end
       },
       {
         header: :presentation,
         data: ->(option_value) do
-          component("ui/forms/field").text_field(
-            "option_type[option_values_attributes][]",
-            :presentation,
-            object: option_value,
-            class: "required",
-            "aria-label": true
-          )
+          [
+            component("ui/forms/field").text_field(
+              "option_type[option_values_attributes][]",
+              :presentation,
+              object: option_value,
+              class: "required",
+              "aria-label": true
+            ),
+            { class: "align-top" }
+          ]
         end
       },
     ]
