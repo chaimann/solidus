@@ -18,6 +18,14 @@ module SolidusAdmin
       solidus_admin.edit_option_type_path(@resource)
     end
 
+    def after_update_path
+      if params[:apply]
+        solidus_admin.edit_option_type_path(@resource)
+      else
+        super
+      end
+    end
+
     def resource_class = Spree::OptionType
 
     def permitted_resource_params

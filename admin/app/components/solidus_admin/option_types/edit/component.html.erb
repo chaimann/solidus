@@ -32,7 +32,10 @@
     </div>
 
     <%= page_footer do %>
-      <%= render component("ui/button").new(text: t(".save"), form: form_id) %>
+      <div class="flex gap-2">
+        <%= render component("ui/button").new(text: t(".save"), form: form_id) %>
+        <%= render component("ui/button").new(text: t(".apply"), scheme: :secondary, form: form_id, name: "apply", value: true) %>
+      </div>
     <% end %>
   <% end %>
 <% end %>
