@@ -77,7 +77,7 @@ class SolidusAdmin::OptionTypes::Edit::OptionValuesTable::Component < SolidusAdm
 
   def sortable_options
     {
-      url: ->(option_value) { "#" },
+      url: ->(option_value) { solidus_admin.move_option_value_path(option_value) },
       param: "position",
       handle: ".handle",
     }
