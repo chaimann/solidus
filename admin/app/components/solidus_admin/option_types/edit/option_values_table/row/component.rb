@@ -44,6 +44,7 @@ class SolidusAdmin::OptionTypes::Edit::OptionValuesTable::Row::Component < Solid
             class: "required",
             "aria-label": true,
             form: @form_id,
+            "data-#{stimulus_id}-target": "focusable",
           )
         end
       },
