@@ -15,7 +15,10 @@ module SolidusAdmin
     end
 
     def add_option_value
-      render turbo_stream: turbo_stream.append(:"ui--table-tbody", component("option_types/edit/option_values_table/row").new)
+      render turbo_stream: turbo_stream.append(
+        :"ui--table-tbody",
+        component("option_types/edit/option_values_table/row").new(form_id: params.require(:form_id))
+      )
     end
 
     private

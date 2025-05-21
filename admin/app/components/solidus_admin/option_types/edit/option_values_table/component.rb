@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class SolidusAdmin::OptionTypes::Edit::OptionValuesTable::Component < SolidusAdmin::BaseComponent
-  def initialize(option_values)
+  def initialize(option_values, form_id:)
     @rows = option_values
+    @form_id = form_id
   end
 
   def call
@@ -24,7 +25,7 @@ class SolidusAdmin::OptionTypes::Edit::OptionValuesTable::Component < SolidusAdm
       {
         col: { class: "w-0" },
         data: ->(option_value) do
-          hidden_field_tag("option_type[option_values_attributes][][id]", option_value.id)
+          hidden_field_tag("option_type[option_values_attributes][][id]", option_value.id, form: @form_id)
         end
       },
       {
@@ -36,7 +37,8 @@ class SolidusAdmin::OptionTypes::Edit::OptionValuesTable::Component < SolidusAdm
               :name,
               object: option_value,
               class: "required",
-              "aria-label": true
+              "aria-label": true,
+              form: @form_id
             ),
             { class: "align-top" }
           ]
@@ -51,7 +53,8 @@ class SolidusAdmin::OptionTypes::Edit::OptionValuesTable::Component < SolidusAdm
               :presentation,
               object: option_value,
               class: "required",
-              "aria-label": true
+              "aria-label": true,
+              form: @form_id
             ),
             { class: "align-top" }
           ]

@@ -10,24 +10,26 @@
       <% end %>
     <% end %>
 
-    <%= form_for @option_type, url: form_url, html: { id: form_id, class: "flex flex-col gap-4" } do |f| %>
-      <%= render component("ui/panel").new(title: t(".panels.option_type.title")) do |panel| %>
-        <% panel.with_section(class: "flex flex-col gap-4") do %>
-          <div class="flex gap-4 w-full">
-            <%= render component("ui/forms/field").text_field(f, :name, class: "required") %>
-            <%= render component("ui/forms/field").text_field(f, :presentation, class: "required") %>
-          </div>
+    <div class="flex flex-col gap-4">
+      <%= form_for @option_type, url: form_url, html: { id: form_id } do |f| %>
+        <%= render component("ui/panel").new(title: t(".panels.option_type.title")) do |panel| %>
+          <% panel.with_section(class: "flex flex-col gap-4") do %>
+            <div class="flex gap-4 w-full">
+              <%= render component("ui/forms/field").text_field(f, :name, class: "required") %>
+              <%= render component("ui/forms/field").text_field(f, :presentation, class: "required") %>
+            </div>
+          <% end %>
         <% end %>
       <% end %>
 
       <%= render component("ui/panel").new(title: t(".panels.option_values.title")) do |panel| %>
         <% panel.with_section(wide: true, high: true, class: "flex flex-col gap-4") do %>
-          <%= render component("option_types/edit/option_values_table").new(@option_type.option_values) %>
+          <%= render component("option_types/edit/option_values_table").new(@option_type.option_values, form_id:) %>
         <% end %>
 
-        <% panel.with_action(name: t(".panels.option_values.add"), href: solidus_admin.add_option_value_option_types_path, data: { turbo_method: :post }) %>
+        <% panel.with_action(name: t(".panels.option_values.add"), href: solidus_admin.add_option_value_option_types_path(form_id:), data: { turbo_method: :post }) %>
       <% end %>
-    <% end %>
+    </div>
 
     <%= page_footer do %>
       <%= render component("ui/button").new(text: t(".save"), form: form_id) %>

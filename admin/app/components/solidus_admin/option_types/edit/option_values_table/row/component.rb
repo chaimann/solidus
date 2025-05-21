@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class SolidusAdmin::OptionTypes::Edit::OptionValuesTable::Row::Component < SolidusAdmin::BaseComponent
+  def initialize(form_id:)
+    @form_id = form_id
+  end
+
   def call
     render component("ui/table/row").new(
       Spree::OptionValue.new,
@@ -39,6 +43,7 @@ class SolidusAdmin::OptionTypes::Edit::OptionValuesTable::Row::Component < Solid
             object: option_value,
             class: "required",
             "aria-label": true,
+            form: @form_id,
           )
         end
       },
@@ -50,6 +55,7 @@ class SolidusAdmin::OptionTypes::Edit::OptionValuesTable::Row::Component < Solid
             object: option_value,
             class: "required",
             "aria-label": true,
+            form: @form_id,
           )
         end
       }
