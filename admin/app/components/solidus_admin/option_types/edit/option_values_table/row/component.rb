@@ -45,6 +45,7 @@ class SolidusAdmin::OptionTypes::Edit::OptionValuesTable::Row::Component < Solid
             "aria-label": true,
             form: @form_id,
             "data-#{stimulus_id}-target": "focusable",
+            "data-action": "keydown.enter->#{stimulus_id}#applyOnEnter",
           )
         end
       },
@@ -57,6 +58,7 @@ class SolidusAdmin::OptionTypes::Edit::OptionValuesTable::Row::Component < Solid
             class: "required",
             "aria-label": true,
             form: @form_id,
+            "data-action": "keydown.enter->#{stimulus_id}#applyOnEnter",
           )
         end
       }
