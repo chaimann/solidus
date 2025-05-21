@@ -3,16 +3,7 @@
 module SolidusAdmin
   class OptionTypesController < SolidusAdmin::ResourcesController
     include Spree::Core::ControllerHelpers::StrongParameters
-
-    before_action :load_option_type, only: [:move]
-
-    def move
-      @option_type.insert_at(params[:position].to_i)
-
-      respond_to do |format|
-        format.js { head :no_content }
-      end
-    end
+    include SolidusAdmin::Moveable
 
     def add_option_value
       render turbo_stream: turbo_stream.append(
@@ -37,11 +28,6 @@ module SolidusAdmin
 
     def resources_sorting_options
       { position: :asc }
-    end
-
-    def load_option_type
-      @option_type = Spree::OptionType.find(params[:id])
-      authorize! action_name, @option_type
     end
   end
 end
