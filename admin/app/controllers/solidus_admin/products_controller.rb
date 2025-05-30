@@ -3,6 +3,7 @@
 module SolidusAdmin
   class ProductsController < SolidusAdmin::BaseController
     include SolidusAdmin::ControllerHelpers::Search
+    include Spree::Core::ControllerHelpers::StrongParameters
 
     search_scope(:all, default: true)
     search_scope(:deleted) { _1.with_discarded.discarded }
@@ -10,8 +11,6 @@ module SolidusAdmin
     search_scope(:available) { _1.available }
     search_scope(:in_stock) { _1.where(id: Spree::Variant.in_stock.distinct.select(:product_id)) }
     search_scope(:out_of_stock) { _1.where.not(id: Spree::Variant.in_stock.distinct.select(:product_id)) }
-
-    before_action :split_params, only: [:update]
 
     def index
       products = apply_search_to(
@@ -44,7 +43,7 @@ module SolidusAdmin
     def update
       @product = Spree::Product.friendly.find(params[:id])
 
-      if @product.update(params.require(:product).permit!)
+      if @product.update(params.require(:product).permit(permitted_product_attributes))
         flash[:success] = t('spree.successfully_updated', resource: [
           Spree::Product.model_name.human,
           @product.name.inspect,
@@ -99,15 +98,6 @@ module SolidusAdmin
 
       flash[:notice] = t('.success')
       redirect_to products_path, status: :see_other
-    end
-
-    def split_params
-      if params[:product][:taxon_ids].present?
-        params[:product][:taxon_ids] = params[:product][:taxon_ids].split(',')
-      end
-      if params[:product][:option_type_ids].present?
-        params[:product][:option_type_ids] = params[:product][:option_type_ids].split(',')
-      end
     end
   end
 end
