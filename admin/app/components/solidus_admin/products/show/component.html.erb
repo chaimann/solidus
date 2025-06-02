@@ -83,13 +83,18 @@
           ) %>
         <% end %>
 
-        <%= render component("ui/panel").new(title: t(".options")) do %>
+        <%= render component("ui/panel").new(title: t(".options")) do |panel| %>
           <%= render component("ui/forms/field").select(
             f,
             :option_type_ids,
             option_type_options,
             multiple: true,
             "size" => option_type_options.size,
+          ) %>
+
+          <% panel.with_action(
+            name: t(".manage_options"),
+            href: solidus_admin.option_types_path
           ) %>
         <% end %>
 
