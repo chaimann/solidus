@@ -5,6 +5,7 @@ en:
   view: "View online"
   delete: "Delete"
   delete_confirmation: "Are you sure you want to delete this product?"
+  edit: "Edit"
   manage_images: "Manage images"
   manage_options: "Manage options"
   manage_properties: "Manage product specifications"
