@@ -1,0 +1,7 @@
+en:
+  add_options:
+    zero: "Add options like size or color"
+    one: "Assign more options"
+    other: "Assign more options"
+  edit: "Edit"
+  title: "Options"
