@@ -86,7 +86,7 @@
         <%= render component("ui/panel").new(title: t(".options")) do |panel| %>
           <div class="flex flex-col gap-4" data-controller="sortable" data-sortable-handle-value=".handle">
             <% @product.product_option_types.includes(option_type: :option_values).order(:position).each do |product_option| %>
-              <div class="flex gap-2 justify-between" data-sortable-url="#">
+              <div class="flex gap-2 justify-between" data-sortable-url=<%= solidus_admin.move_product_option_type_path(product_option) %>>
                 <div class="flex gap-2">
                   <div class="flex items-center">
                     <%= render component("ui/icon").new(name: "draggable", class: "w-6 h-6 cursor-grab handle fill-gray-500") %>
