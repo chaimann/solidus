@@ -16,6 +16,11 @@ SolidusAdmin::Engine.routes.draw do
       put :discontinue
       put :activate
     end
+
+    member do
+      get :edit_options
+      patch :update_options
+    end
   end
 
   # Needs a constraint to avoid interpreting "new" as a product's slug

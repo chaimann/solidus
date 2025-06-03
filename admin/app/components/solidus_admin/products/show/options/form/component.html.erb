@@ -1,0 +1,13 @@
+<%= turbo_frame_tag :product_option_types_form_frame, target: "_top" do %>
+  <%= form_for @product, url: solidus_admin.update_options_product_path(@product), html: { id: :product_option_types_form, class: "flex gap-4 justify-between items-end" } do |f| %>
+    <%= hidden_field_tag "#{f.object_name}[option_type_ids][]", nil %>
+    <%= render component("ui/forms/field").select(
+      f,
+      :option_type_ids,
+      option_type_options,
+      multiple: true,
+      "size" => option_type_options.size,
+    ) %>
+    <%= render component("ui/button").submit(resource: @product, form: :product_option_types_form) %>
+  <% end %>
+<% end %>

@@ -99,6 +99,18 @@ module SolidusAdmin
       redirect_to products_path, status: :see_other
     end
 
+    def edit_options
+      @product = Spree::Product.friendly.find(params[:id])
+      render component("products/show/options/form").new(product: @product)
+    end
+
+    def update_options
+      @product = Spree::Product.friendly.find(params[:id])
+      @product.update(params.require(:product).permit(option_type_ids: []))
+      flash.now[:success] = t('.success')
+      respond_to(&:turbo_stream)
+    end
+
     private
 
     def product_params

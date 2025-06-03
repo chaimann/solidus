@@ -8,3 +8,5 @@ en:
         success: "Products were successfully discontinued."
       activate:
         success: "Products were successfully activated."
+      update_options:
+        success: "Product options successfully updated."
