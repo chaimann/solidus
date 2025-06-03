@@ -102,7 +102,7 @@
                     </div>
                   </div>
                   <div class="flex items-center">
-                    <%= render component("ui/button").new(tag: :a, href: "#", scheme: :secondary, text: t(".edit")) %>
+                    <%= render component("ui/button").new(tag: :a, href: spree.edit_admin_option_type_path(product_option.option_type), scheme: :secondary, text: t(".edit")) %>
                   </div>
                 </div>
               <% end %>
