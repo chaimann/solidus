@@ -14,10 +14,7 @@ class SolidusAdmin::Products::Show::Component < SolidusAdmin::BaseComponent
   private
 
   def taxon_options
-    @taxon_options ||= Spree::Taxon.order(:lft).pluck(:name, :id, :lft, :depth).map do
-      name, id, _lft, depth = _1
-      ["#{'    ' * depth} → #{name}", id]
-    end
+    @taxon_options ||= Spree::Taxon.order(:lft).pluck(:name, :id)
   end
 
   def option_type_options
