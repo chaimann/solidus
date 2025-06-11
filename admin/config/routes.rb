@@ -16,6 +16,8 @@ SolidusAdmin::Engine.routes.draw do
       put :discontinue
       put :activate
     end
+
+    resources :categories, only: [:new, :create], controller: :product_categories
   end
 
   # Needs a constraint to avoid interpreting "new" as a product's slug
