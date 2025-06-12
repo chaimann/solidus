@@ -1,14 +1,30 @@
-<%= turbo_frame_tag :new_product_category, target: :product_organization do %>
-  <%= render component("ui/modal").new(title: t(".title")) do |modal| %>
-    <%= form_for @product_category, url: solidus_admin.product_categories_path(@product) do |f| %>
-      <div class="flex flex-col gap-6 pb-4">
-        <%= render component("ui/forms/field").text_field(f, :name, class: "required") %>
-      </div>
+<%= turbo_frame_tag :new_product_category, target: "_top" do %>
+  <%= tag.div **stimulus_controller do %>
+    <%= render component("ui/modal").new(title: t(".title")) do |modal| %>
+      <%= form_for @taxon, url: solidus_admin.product_taxons_path(@product), html: { id: dom_id(@taxon), **stimulus_target("form") } do |f| %>
+        <div class="flex flex-col gap-6 pb-4">
+          <%= render component("ui/forms/field").text_field(f, :name, class: "required") %>
+          <%= render component("ui/forms/field").select(
+            f,
+            :taxonomy_id,
+            taxonomies_options,
+            value: @taxonomy_id,
+            **stimulus_target("taxonomiesSelect"),
+            **stimulus_action("updateParents", on: "change"),
+            **stimulus_param(name: :url, value: solidus_admin.new_product_taxon_url(@product))
+          ) %>
+          <%= render component("ui/forms/field").select(
+            f,
+            :parent_id,
+            parent_taxon_options
+          ) %>
+        </div>
+      <% end %>
       <% modal.with_actions do %>
         <form method="dialog">
           <%= render component("ui/button").new(scheme: :secondary, text: t('.cancel')) %>
         </form>
-        <%= render component("ui/button").new(type: :submit, text: t('.submit')) %>
+        <%= render component("ui/button").new(type: :submit, text: t('.submit'), form: dom_id(@taxon)) %>
       <% end %>
     <% end %>
   <% end %>

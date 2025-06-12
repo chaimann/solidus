@@ -168,7 +168,7 @@
             ) %>
             <% panel.with_action(
               name: t(".add_new_category"),
-              href: solidus_admin.new_product_category_path(@product),
+              href: solidus_admin.new_product_taxon_path(@product),
               data: { turbo_frame: :new_product_category }
             ) %>
           <% end %>
@@ -193,4 +193,4 @@
   <% end %>
 <% end %>
 
-<%= turbo_frame_tag :new_product_category, target: :product_organization %>
+<%= turbo_frame_tag :new_product_category, target: "_top" %>
