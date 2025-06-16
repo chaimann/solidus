@@ -46,6 +46,7 @@ class SolidusSelect extends HTMLSelectElement {
       wrapperClass: "wrapper",
       maxOptions: null,
       refreshThrottle: 0,
+      itemLabelField: "itemLabel",
       plugins: {
         no_active_items: true,
         remove_button: {
@@ -60,6 +61,10 @@ class SolidusSelect extends HTMLSelectElement {
           const message = this.input.getAttribute("data-no-results-message");
           return `<div class='no-results'>${message}</div>`;
         },
+        item: function(data, escape) {
+          const itemLabel = data[this.settings.itemLabelField] || data[this.settings.labelField];
+          return `<div>${escape(itemLabel)}</div>`;
+        }
       },
     };
 
