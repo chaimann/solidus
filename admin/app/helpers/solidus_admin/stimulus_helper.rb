@@ -24,11 +24,21 @@ module SolidusAdmin
     end
 
     def stimulus_value(name:, value:, controller: stimulus_id)
-      { "data-#{controller}-#{name}-value": value }
+      stimulus_property(:value, name:, value:, controller:)
     end
 
     def stimulus_param(name:, value:, controller: stimulus_id)
-      { "data-#{controller}-#{name}-param": value }
+      stimulus_property(:param, name:, value:, controller:)
+    end
+
+    def stimulus_class(name:, value:, controller: stimulus_id)
+      stimulus_property(:class, name:, value:, controller:)
+    end
+
+    private
+
+    def stimulus_property(property, name:, value:, controller:)
+      { "data-#{controller}-#{name}-#{property}": value }
     end
   end
 end

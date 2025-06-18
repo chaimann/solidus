@@ -87,4 +87,18 @@ RSpec.describe SolidusAdmin::StimulusHelper, type: :helper do
       end
     end
   end
+
+  describe "#stimulus_class" do
+    it "returns correct data attribute" do
+      expect(dummy.stimulus_class(name: "loading", value: "text-gray-100")).
+        to eq("data-dummy-loading-class": "text-gray-100")
+    end
+
+    context "with custom controller name" do
+      it "returns correct data attribute" do
+        expect(dummy.stimulus_class(name: "loading", value: "text-gray-100", controller: "item")).
+          to eq("data-item-loading-class": "text-gray-100")
+      end
+    end
+  end
 end
