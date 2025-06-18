@@ -25,5 +25,9 @@ module SolidusAdmin
     def stimulus_value(name:, value:)
       { "data-#{stimulus_id}-#{name}-value": value }
     end
+
+    def stimulus_param(name:, value:)
+      { "data-#{stimulus_id}-#{name}-param": value }
+    end
   end
 end
