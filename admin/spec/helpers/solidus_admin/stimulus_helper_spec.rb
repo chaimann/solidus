@@ -17,6 +17,12 @@ RSpec.describe SolidusAdmin::StimulusHelper, type: :helper do
     it "returns correct data attribute" do
       expect(dummy.stimulus_controller).to eq("data-controller": "dummy")
     end
+
+    context "with custom controller name" do
+      it "returns correct data attribute" do
+        expect(dummy.stimulus_controller("sortable")).to eq("data-controller": "sortable")
+      end
+    end
   end
 
   describe "#stimulus_action" do
@@ -24,9 +30,22 @@ RSpec.describe SolidusAdmin::StimulusHelper, type: :helper do
       expect(dummy.stimulus_action("search")).to eq("data-action": "dummy#search")
     end
 
+    context "with custom controller name" do
+      it "returns correct data attribute" do
+        expect(dummy.stimulus_action("search", controller: "table")).to eq("data-action": "table#search")
+      end
+    end
+
     context "with :on passed" do
       it "returns correct data attribute" do
         expect(dummy.stimulus_action("search", on: "change")).to eq("data-action": "change->dummy#search")
+      end
+
+      context "with custom controller name" do
+        it "returns correct data attribute" do
+          expect(dummy.stimulus_action("search", on: "change", controller: "table")).
+            to eq("data-action": "change->table#search")
+        end
       end
     end
   end
@@ -35,17 +54,37 @@ RSpec.describe SolidusAdmin::StimulusHelper, type: :helper do
     it "returns correct data attribute" do
       expect(dummy.stimulus_target("input")).to eq("data-dummy-target": "input")
     end
+
+    context "with custom controller name" do
+      it "returns correct data attribute" do
+        expect(dummy.stimulus_target("input", controller: "form")).to eq("data-form-target": "input")
+      end
+    end
   end
 
   describe "#stimulus_value" do
     it "returns correct data attribute" do
       expect(dummy.stimulus_value(name: "amount", value: 3)).to eq("data-dummy-amount-value": 3)
     end
+
+    context "with custom controller name" do
+      it "returns correct data attribute" do
+        expect(dummy.stimulus_value(name: "amount", value: 3, controller: "calculator")).
+          to eq("data-calculator-amount-value": 3)
+      end
+    end
   end
 
   describe "#stimulus_param" do
     it "returns correct data attribute" do
       expect(dummy.stimulus_param(name: "url", value: "/index")).to eq("data-dummy-url-param": "/index")
+    end
+
+    context "with custom controller name" do
+      it "returns correct data attribute" do
+        expect(dummy.stimulus_param(name: "url", value: "/index", controller: "list")).
+          to eq("data-list-url-param": "/index")
+      end
     end
   end
 end
