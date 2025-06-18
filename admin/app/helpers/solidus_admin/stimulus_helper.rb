@@ -19,6 +19,16 @@ module SolidusAdmin
       { "data-action": action_construct.join }
     end
 
+    def stimulus_actions(actions)
+      result = { "data-action": [] }
+      actions.each do |action_args|
+        result[:"data-action"].concat stimulus_action(*action_args)
+      end
+
+      result[:"data-action"] = result[:"data-action"].join(" ")
+      result
+    end
+
     def stimulus_target(target, controller: stimulus_id)
       { "data-#{controller}-target": target }
     end
